@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Interpreting the Weight Space of Customized Diffusion Models.">
+  <meta name="keywords" content="Diffusion Models, Interpretability, Weight Space, Personalization">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>weights2weights</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./images/logo.png">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+
+</head>
+<body>
+
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Interpreting the Weight Space of Customized Diffusion Models</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://avdravid.github.io/">Amil Dravid</a><sup class="star">*</sup><sup>1,2</sup>,</span>
+            <span class="author-block">
+              <a href="https://yossigandelsman.github.io/">Yossi Gandelsman</a><sup class="star">*</sup><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="https://wangkua1.github.io/">Kuan-Chieh (Jackson) Wang</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://rameenabdal.github.io/">Rameen Abdal</a><sup>3</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://stanford.edu/~gordonwz/">Gordon Wetzstein</a><sup>3</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://people.eecs.berkeley.edu/~efros/">Alexei A. Efros</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://kfiraberman.github.io/">Kfir Aberman</a><sup>2</sup>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>UC Berkeley,</span>
+            <span class="author-block"><sup>2</sup>Snap Inc.,</span>
+            <span class="author-block"><sup>3</sup>Stanford University</span>
+          </div>
+          <div class="is-size-5 publication-authors">
+            <p style="font-size: 15px;"><sup class="star">*</sup>Equal contribution</p>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2406.09413"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Video Link. -->
+              <span class="link-block">
+                <a href="https://youtu.be/95raWv_k08c"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="#"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code+Data (end of June release)</span>
+                  </a>
+              </span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <video id="teaser" autoplay muted loop playsinline height="100%" style="border: 2px solid gray; border-radius: 15px; box-shadow: 0px 0px 10px #999; padding: 0px;">
+        <source src="./images/teaser_anim_final.m4v"
+                type="video/mp4">
+      </video>
+      <h2 class="subtitle has-text-centered">
+        We discover a subspace in diffusion weights that behaves as an interpretable latent space over customized models.
+      </h2>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p style="font-size: 18px;">
+          We investigate the space of weights spanned by a large collection of customized diffusion models. We populate this space by creating a dataset of over 60,000 models, each of which is fine-tuned to insert a different person’s visual identity. Next, we model the underlying manifold of these weights as a subspace, which we term <em>weights2weights</em>. We demonstrate three immediate applications of this space -- sampling, editing, and inversion. First, as each point in the space corresponds to an identity, sampling a set of weights from it results in a model encoding a novel identity. Next, we find linear directions in this space corresponding to semantic edits of the identity (e.g., adding a beard). These edits persist in appearance across generated samples. Finally, we show that inverting a single image into this space reconstructs a realistic identity, even if the input image is out of distribution (e.g., a painting). Our results indicate that the weight space of fine-tuned diffusion models behaves as an interpretable latent space of identities.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+    <!-- Paper video. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+<!--         <h2 class="title is-3">Video</h2> -->
+        <div class="publication-video">
+          <iframe src="https://www.youtube.com/embed/95raWv_k08c"
+                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+    <!--/ Paper video. -->
+  </div>
+</section>
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <style>
+    img {
+      -drag: none;
+      user-select: none;
+      -moz-user-select: none;
+      -webkit-user-drag: none;
+      -webkit-user-select: none;
+      -ms-user-select: none;
+   }
+  </style>
+    <div class="columns is-centered has-text-centered">
+      <h2 class="title is-3">Creating <em>weights2weights</em> Space</h2>
+    </div>
+    <div class="content has-text-justified" >
+      <!-- <h3 class="title is-3">Key idea</h3> -->
+      <img src="./images/w2w_scheme.jpg" alt="scheme" style="border: 2px solid gray; border-radius: 15px; box-shadow: 0px 0px 10px #999; padding: 5px;">
+      <br>
+      <p style="font-size: 18px;"><br>We create a dataset of model weights where each model is finetuned to encode a specific identity using low-rank updates (LoRA). These model weights lie on a weights manifold that we further project into a lower-dimensional subspace spanned by its principal components. We term the resulting space <em>weighst2weights</em> (<em>w2w</em>), in which operations transform one set of valid identity-encoding weights into another. We train linear classifiers to find separating hyperplanes in this space for semantic attributes. These define disentangled edit directions for an identity-encoding model in weight space.</p>
+
+    </div>
+  </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <style>
+    img {
+      -drag: none;
+      user-select: none;
+      -moz-user-select: none;
+      -webkit-user-drag: none;
+      -webkit-user-select: none;
+      -ms-user-select: none;
+   }
+   label {
+            display: block;
+            text-align: center;
+            margin-bottom: 0px;
+            font-size: 25px; /* Responsive font size */
+        }
+    .slider {
+            width: 35vw; /* Adjust the width of the slider here, responsive to viewport width */
+            max-width: 1000px; /* Maximum width for larger screens */
+            margin: 0px 0;
+        }
+        .container {
+        text-align: center;
+    }
+  </style>
+
+    <div class="columns is-centered has-text-centered">
+      <h2 class="title is-3">Identity Editing</h2>
+    </div >
+    <div class="content has-text-justified" >
+           <p style="font-size: 18px;"> Given an identity parameterized by weights, we can manipulate attributes by traversing semantic directions in the <em>w2w</em> weight subspace. The edited weights result in a new model, where the subject has different attributes while still maintaining as much of the prior identity. These edits are <b>not</b> image-specific, and persist in appearance across different generation seeds and prompts. Additionally, as we operate on an identity weight manifold, minimal changes are made to other concepts, such as scene layout or other people. Try out the sliders below to demonstrate edits in <em>w2w</em> space. </p>
+    </div>
+
+    <h3 class="title is-4">Slide the bars to edit the identity.</h2>
+    <div class="content" style="border: 2px solid gray; border-radius: 15px; box-shadow: 0px 0px 10px #999; padding: 20px;">
+      <div id="imageContainer">
+        <img id="dynamicImage" src="./images/edits/0_0_0.jpg" alt="Editing">
+    </div>
+
+
+      <label for="sliderA">Curly Hair:</label>
+      <input type="range" id="sliderA" class="slider is-large is-info" name="sliderA" min="0" max="4" value="0" oninput="updateImage()">
+
+    <!-- <input type="range" id="sliderA" name="sliderA" min="0" max="4" value="0"> -->
+    <span id="valueA">0</span>
+
+    <br>
+
+    <label for="sliderB">Pointy Nose:</label>
+    <!-- <input type="range" id="sliderB" name="sliderB" min="0" max="4" value="0"> -->
+    <input type="range" id="sliderB" class="slider is-large is-info" name="sliderB" min="0" max="4" value="0" oninput="updateImage()">
+
+    <span id="valueB">0</span>
+
+    <br>
+
+    <label for="sliderC">Narrow Eyes:</label>
+    <!-- <input type="range" id="sliderC" name="sliderC" min="0" max="4" value="0"> -->
+    <input type="range" id="sliderC" class="slider is-large is-info" name="sliderC" min="0" max="4" value="0" oninput="updateImage()">
+
+    <span id="valueC">0</span>
+
+    <script>
+        const sliderA = document.getElementById('sliderA');
+        const sliderB = document.getElementById('sliderB');
+        const sliderC = document.getElementById('sliderC');
+
+        const valueA = document.getElementById('valueA');
+        const valueB = document.getElementById('valueB');
+        const valueC = document.getElementById('valueC');
+
+        const dynamicImage = document.getElementById('dynamicImage');
+
+        function updateImage() {
+            const a = sliderA.value;
+            const b = sliderB.value;
+            const c = sliderC.value;
+
+            valueA.textContent = a;
+            valueB.textContent = b;
+            valueC.textContent = c;
+
+            dynamicImage.src = `./images/edits/${a}_${b}_${c}.jpg`;
+        }
+
+        sliderA.addEventListener('input', updateImage);
+        sliderB.addEventListener('input', updateImage);
+        sliderC.addEventListener('input', updateImage);
+    </script>
+    </div>
+  </div>
+  </div>
+</section>
+
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <style>
+    img {
+      width:100%;
+   }
+   .clickable-area {
+            cursor: pointer;
+        }
+  </style>
+    <div class="columns is-centered has-text-centered">
+      <h2 class="title is-3">Inversion</h2>
+    </div>
+    <div class="content has-text-justified" >
+      By constraining a diffusion model's weights to lie in <em>w2w</em> space while following the standard diffusion loss, we can invert the identity from a single image into the model without overfitting. Typical inversion into a generative latent space projects the input onto the data (e.g., image) manifold. Similarly, we project onto the manifold of identity-encoding model weights. Projection into <em>w2w</em> space generalizes to unrealistic or non-human identities, distilling a realistic subject from an out-of-distribution identity. We provide examples of inversion below with a variety of input types.
+    </div>
+    <h3 class="title is-4">Click on an image to invert its subject into a model.</h2>
+    <div class="content">
+      <!-- <h3 class="title is-3">Key idea</h3> -->
+      <img src="./images/inversion/inversion_animation.gif" alt="inversion" usemap="#workmapb" id="mainImageb" style="border: 2px solid gray; border-radius: 15px; box-shadow: 0px 0px 10px #999;">
+      <!-- style="transform: translate(45px,0px);" -->
+      <map name="workmapb">
+        <area id="rect1b" shape="rect" coords="32, 51, 603, 607" alt="rect1b"  class="clickable-area" onclick="changeImage2('./images/inversion/inversion_Part21.jpg')">
+        <area id="rect2b" shape="rect" coords="32, 645, 603, 1201" alt="rect2b" class="clickable-area" onclick="changeImage2('./images/inversion/inversion_Part22.jpg')">
+        <area id="rect3b" shape="rect" coords="32, 1238, 603, 1794" alt="rect3b" class="clickable-area" onclick="changeImage2('./images/inversion/inversion_Part23.jpg')">
+      </map>
+
+      <script>
+        function changeImage2(im_name) {
+          document.getElementById('mainImageb').src = im_name;
+
+      }
+  </script>
+
+    </div>
+  </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <style>
+    img {
+      width:100%;
+   }
+   .clickable-area {
+            cursor: pointer;
+        }
+  </style>
+    <div class="columns is-centered has-text-centered">
+      <h2 class="title is-3">Sampling</h2>
+    </div>
+    <div class="content has-text-justified" >
+      <p style="font-size: 18px;">Modeling the underlying manifold of identity-encoding weights allows sampling a new model that lies on it. This results in a new model that generates a novel identity that is consistent across generations. We provide examples of sampling models from <em>w2w</em> space below, demonstrating a variety of facial attributes, hairstyles, and contexts. </p>
+    </div>
+
+    <h3 class="title is-4">Click to sample an identity-encoding model.</h2>
+      <!-- <h3 class="title is-3">Key idea</h3> -->
+      <img src="./images/sampling/sample_animation.gif" alt="sampling" usemap="#workmap" id="mainImage" style="border: 2px solid gray; border-radius: 15px; box-shadow: 0px 0px 10px #999; padding: 0px;" >
+
+      <map name="workmap" id="workmap">
+        <area id="rect1" shape="rect" coords="1866,754,2225,871" alt="rect1" title="click" class="clickable-area" onclick="changeImage('./images/sampling/sampling_Part19.jpg')">
+        <area id="rect2" shape="rect" coords="2282,731,2643,847" alt="rect2" title="click" class="clickable-area" onclick="changeImage('./images/sampling/sampling_Part20.jpg')">
+        <area id="rect3" shape="rect" coords="1523,571,1884,687" alt="rect2" title="click" class="clickable-area" onclick="changeImage('./images/sampling/sampling_Part21.jpg')">
+        <area id="rect4" shape="rect" coords="1287,790,1648,905" alt="rect2" title="click" class="clickable-area" onclick="changeImage('./images/sampling/sampling_Part22.jpg')">
+        <area id="rect4" shape="rect" coords="888,687,1250,802" alt="rect2" title="click" class="clickable-area" onclick="changeImage('./images/sampling/sampling_Part23.jpg')">
+      </map>
+
+      <script>
+
+          function changeImage(im_name) {
+            document.getElementById('mainImage').src = im_name;
+
+        }
+    </script>
+
+    </div>
+  </div>
+  </div>
+</section>
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <style>
+    img {
+      -drag: none;
+      user-select: none;
+      -moz-user-select: none;
+      -webkit-user-drag: none;
+      -webkit-user-select: none;
+      -ms-user-select: none;
+   }
+  </style>
+    <div class="columns is-centered has-text-centered">
+      <h2 class="title is-3">Connection to Generative Latent Spaces</h2>
+    </div>
+    <div class="content has-text-justified">
+      <img src="./images/w2w_vs_GAN.jpg" alt="w2w_vs_gan">
+      <p style="font-size: 18px;">As seen from the interactive examples above, <em>weights2weights</em> space enables applications analogous to those of a traditional generative latent space–-inversion, editing, and sampling–-but producing model weights rather than images. With generative models such as GANs, the instance is a latent mapping to an image, whereas the instance with <em>weights2weights</em> is a set of identity-encoding weights. </p>
+</section>
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <style>
+    img {
+      -drag: none;
+      user-select: none;
+      -moz-user-select: none;
+      -webkit-user-drag: none;
+      -webkit-user-select: none;
+      -ms-user-select: none;
+   }
+   .image-container img {
+            width: 50%;  /* Adjust the width as needed */
+            max-width: 500px;  /* Maximum width */
+            height: auto;  /* Maintain aspect ratio */
+        }
+  </style>
+    <div class="columns is-centered has-text-centered">
+      <h2 class="title is-3">More Results</h2>
+    </div>
+    <br>
+    <h3 class="title is-4">Composing Edits in Weight Space</h2>
+    <img src="./images/compose_all.jpeg" alt="compose" style="border: 2px solid gray; border-radius: 15px; box-shadow: 0px 0px 10px #999; padding: 5px;">
+    <br>
+    <br>
+    <br>
+    <h3 class="title is-4">Continuous Control over Identity Edits</h2>
+      <img src="./images/continuous.jpeg" alt="continuous" style="border: 2px solid gray; border-radius: 15px; box-shadow: 0px 0px 10px #999; padding: 5px;">
+     <br>
+    <br>
+    <br>
+    <h3 class="title is-4">Identity Inversion + Editing</h2>
+      <img src="./images/inversion_web.jpg" alt="inversion_edit" style="border: 2px solid gray; border-radius: 15px; box-shadow: 0px 0px 10px #999; padding: 5px;">
+    <br>
+    <br>
+    <br>
+    <h3 class="title is-4">Out-of-Distribution Identity Projection</h2>
+      <img src="./images/ood_project_web.jpeg" alt="ood_project" style="border: 2px solid gray; border-radius: 15px; box-shadow: 0px 0px 10px #999; padding: 5px;">
+      <br>
+      <br>
+      <br>
+      <h3 class="title is-4"><em>w2w</em> Sampling and Nearest Neighbor Identities</h2>
+        <img src="./images/sampling_web.jpeg" alt="sampling" style="border: 2px solid gray; border-radius: 15px; box-shadow: 0px 0px 10px #999; padding: 5px; width: 750px;">
+</section>
+
+
+
+
+
+
+
+<hr>
+
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+  <div class="bibtex">
+  <style>
+    .bibtex{
+  text-align: left;
+}
+
+
+  </style>
+
+
+    <h2 class="title">Acknowledgments</h2>
+    <p style="font-size: 18px;">
+      The authors would like to thank Grace Luo, Lisa Dunlap, Konpat Preechakul, Sheng-Yu Wang, Stephanie Fu, Or Patashnik, Daniel Cohen-Or, and Sergey Tulyakov for helpful discussions. AD is supported by the US Department of Energy Computational Science Graduate Fellowship. Part of the work was completed by AD as an intern with Snap Inc. YG is funded by the Google Fellowship. Additional funding came from ONR MURI.
+
+    </p>
+
+</div>
+</div>
+
+</section>
+
+<hr>
+
+
+
+
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop">
+  <div class="bibtex">
+  <style>
+    .bibtex{
+  text-align: left;
+}
+
+
+  </style>
+
+
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@misc{dravid2024interpreting,
+      title={Interpreting the Weight Space of Customized Diffusion Models},
+      author={Amil Dravid and Yossi Gandelsman and Kuan-Chieh Wang and Rameen Abdal and Gordon Wetzstein and Alexei A. Efros and Kfir Aberman},
+      year={2024},
+      eprint={2406.09413},
+}</code></pre>
+
+</div>
+</div>
+
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link"
+         href="./static/videos/nerfies_paper.pdf">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/snap-research/weights2weights/" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is based on the template from the <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a> website under the <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="./static/resize/imageMapResizer.min.js"></script>
+<script>
+  imageMapResize();
+  </script>
+
+</body>
+</html>
