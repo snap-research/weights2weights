@@ -13,11 +13,12 @@ Our code is developed in `PyTorch 2.3.0` with `CUDA 12.1`, `torchvision=0.18.0`,
 
 To replicate our environment, install [Anaconda](https://docs.anaconda.com/free/anaconda/install/index.html), and run the following commands.
 ```
-$ conda env create -f w2w.yml
+$ conda create -n w2w
 $ conda activate w2w
+$ conda install pip
+$ pip install -r requirements.txt
 ```
 
-Alternatively, you can follow the setup from [PEFT](https://huggingface.co/docs/peft/main/en/task_guides/dreambooth_lora).
 ### Files
 The files needed to create *w2w* space, load models, train classifiers, etc. can be downloaded at this [link](https://drive.google.com/file/d/1W1_klpdeCZr5b0Kdp7SaS7veDV2ZzfbB/view?usp=sharing). Keep the folder structure and place it into the `weights2weights` folder containing all the code.
 
