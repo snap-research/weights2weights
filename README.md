@@ -52,13 +52,11 @@ Our code is based on implementations from the following repos:
 ## Citation
 If you found this repository useful please consider starring ⭐ and citing:
 ```
-@InProceedings{Dravid_2023_ICCV,
-    author    = {Dravid, Amil and Gandelsman, Yossi and Efros, Alexei A. and Shocher, Assaf},
-    title     = {Rosetta Neurons: Mining the Common Units in a Model Zoo},
-    booktitle = {Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)},
-    month     = {October},
-    year      = {2023},
-    pages     = {1934-1943}
+@article{dravid2024interpreting,
+  title={Interpreting the Weight Space of Customized Diffusion Models},
+  author={Dravid, Amil and Gandelsman, Yossi and Wang, Kuan-Chieh and Abdal, Rameen and Wetzstein, Gordon and Efros, Alexei A and Aberman, Kfir},
+  journal={arXiv preprint arXiv:2406.09413},
+  year={2024}
 }
 ```
 
