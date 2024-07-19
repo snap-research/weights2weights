@@ -24,7 +24,7 @@ The Hugging Face model card is available at this [link](https://huggingface.co/S
 
 The files needed to create *w2w* space, load models, train classifiers, etc. can be downloaded at this [link](https://drive.google.com/file/d/1W1_klpdeCZr5b0Kdp7SaS7veDV2ZzfbB/view?usp=sharing), or [here](https://huggingface.co/Snapchat/weights2weights/tree/main/files). Keep the folder structure and place the `files` folder into the `weights2weights` folder containing all the code.
 
-The dataset of full model weights (i.e. the full Dreambooth LoRA parameters) is available [here] (https://huggingface.co/Snapchat/weights2weights/tree/main/weights_datasets).  
+The dataset of full model weights (i.e. the full Dreambooth LoRA parameters) is available [here](https://huggingface.co/Snapchat/weights2weights/tree/main/weights_datasets).  
 
 ## Sampling 
 We provide an interactive notebook for sampling new identity-encoding models from *w2w* space in `sampling/sampling.ipynb`. Instructions are provided in the notebook. Once a model is sampled, you can run typical inference with various text prompts and generation seeds as with a typical personalized model. 
