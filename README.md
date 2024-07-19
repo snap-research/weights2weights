@@ -1,7 +1,7 @@
 # Interpreting the Weight Space of Customized Diffusion Models
 [[paper](https://arxiv.org/abs/2306.09346)] [[project page](https://snap-research.github.io/weights2weights/)]
 
-Official implementation of the paper "Interpreting the Weight Space of Customized Diffusion Models."
+Official implementation of the paper "Interpreting the Weight Space of Customized Diffusion Models" (aka *weights2weights*). 
 
 <img src="./assets/teaser.jpg" alt="teaser" width="800"/>
 
@@ -39,8 +39,8 @@ The details on the various arguments are provided in `invert.py`.
 ## Editing 
 We provide an interactive notebook for editing the identity encoded in a model in `editing/identity_editing.ipynb`. Instructions are provided in the notebook. Another notebook is provided which shows how to compose multiple attribute edits together in `editing/multiple_edits.ipynb`.
 
-## Loading and Saving Models
-Various notebooks provide examples on how to save models either as low dimensional *w2w* models (represented by principal component coefficients), or as models compatible with standard LoRA such as with Diffusers [pipelines](https://huggingface.co/docs/diffusers/en/api/pipelines/overview). We provide a notebook in `other/loading.ipynb`that demonstrates how these weights can be loaded into either format. 
+## Loading Models/Reading from Dataset
+Various notebooks provide examples on how to save models either as low dimensional *w2w* models (represented by principal component coefficients), or as models compatible with standard LoRA such as with Diffusers [pipelines](https://huggingface.co/docs/diffusers/en/api/pipelines/overview). We provide a notebook in `other/loading.ipynb` that demonstrates how these weights can be loaded into either format. We provide a notebook in `other/datasets.ipynb` demonstrating how to read from the dataset of model weights.
 
 ## Acknowledgments
 Our code is based on implementations from the following repos: 
