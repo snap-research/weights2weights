@@ -1,5 +1,5 @@
 # Interpreting the Weight Space of Customized Diffusion Models
-[[paper](https://arxiv.org/abs/2406.09413)] [[project page](https://snap-research.github.io/weights2weights/)]
+[[paper](https://arxiv.org/abs/2406.09413)] [[project page](https://snap-research.github.io/weights2weights/)] [[Demo](https://huggingface.co/spaces/snap-research/weights2weights)]
 
 Official implementation of the paper "Interpreting the Weight Space of Customized Diffusion Models" (aka *weights2weights*). 
 
