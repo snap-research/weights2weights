@@ -26,6 +26,9 @@ The files needed to create *w2w* space, load models, train classifiers, etc. can
 
 The dataset of full model weights (i.e. the full Dreambooth LoRA parameters) is available [here](https://huggingface.co/Snapchat/weights2weights/tree/main/weights_datasets).  
 
+The dataset of identity images used to conduct Dreambooth fine-tuning is available [here] (https://huggingface.co/datasets/wangkua1/w2w-celeba-generated/tree/main).  
+
+
 ## Sampling 
 We provide an interactive notebook for sampling new identity-encoding models from *w2w* space in `sampling/sampling.ipynb`. Instructions are provided in the notebook. Once a model is sampled, you can run typical inference with various text prompts and generation seeds as with a typical personalized model. 
 
@@ -43,6 +46,12 @@ We provide an interactive notebook for editing the identity encoded in a model i
 
 ## Loading Models/Reading from Dataset
 Various notebooks provide examples on how to save models either as low dimensional *w2w* models (represented by principal component coefficients), or as models compatible with standard LoRA such as with Diffusers [pipelines](https://huggingface.co/docs/diffusers/en/api/pipelines/overview). We provide a notebook in `other/loading.ipynb` that demonstrates how these weights can be loaded into either format. We provide a notebook in `other/datasets.ipynb` demonstrating how to read from the dataset of model weights.
+
+## Recreating the Dataset of Weights
+To recreate a single datapoint in our dataset of model weights, run 
+```
+$ bash train.sh
+```, which conducts Dreambooth LoRA fine-tuning by running `train_dreambooth.py` given a folder of identity images. This is based on [PEFT](https://github.com/huggingface/peft/tree/main/examples/lora_dreambooth). Download the folders of identity images from this [link] (https://huggingface.co/datasets/wangkua1/w2w-celeba-generated/tree/main). Use 
 
 ## Acknowledgments
 Our code is based on implementations from the following repos: 
