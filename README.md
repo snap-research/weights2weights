@@ -26,7 +26,7 @@ The files needed to create *w2w* space, load models, train classifiers, etc. can
 
 The dataset of full model weights (i.e. the full Dreambooth LoRA parameters) is available [here](https://huggingface.co/Snapchat/weights2weights/tree/main/weights_datasets).  
 
-The dataset of identity images used to conduct Dreambooth fine-tuning is available [here] (https://huggingface.co/datasets/wangkua1/w2w-celeba-generated/tree/main).  
+The dataset of identity images used to conduct Dreambooth fine-tuning is available [here](https://huggingface.co/datasets/wangkua1/w2w-celeba-generated/tree/main).  
 
 
 ## Sampling 
