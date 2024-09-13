@@ -48,7 +48,7 @@ We provide an interactive notebook for editing the identity encoded in a model i
 Various notebooks provide examples on how to save models either as low dimensional *w2w* models (represented by principal component coefficients), or as models compatible with standard LoRA such as with Diffusers [pipelines](https://huggingface.co/docs/diffusers/en/api/pipelines/overview). We provide a notebook in `other/loading.ipynb` that demonstrates how these weights can be loaded into either format. We provide a notebook in `other/datasets.ipynb` demonstrating how to read from the dataset of model weights.
 
 ## Recreating the Dataset of Weights
-To recreate a single datapoint in our dataset of model weights, run 
+To recreate a single model in our dataset of model weights, run 
 ```
 $ bash train.sh
 ```
