@@ -51,7 +51,8 @@ Various notebooks provide examples on how to save models either as low dimension
 To recreate a single datapoint in our dataset of model weights, run 
 ```
 $ bash train.sh
-```, which conducts Dreambooth LoRA fine-tuning by running `train_dreambooth.py` given a folder of identity images. This is based on [PEFT](https://github.com/huggingface/peft/tree/main/examples/lora_dreambooth). Download the folders of identity images from this [link] (https://huggingface.co/datasets/wangkua1/w2w-celeba-generated/tree/main). Use 
+```
+, which conducts Dreambooth LoRA fine-tuning by running `train_dreambooth.py` given a folder of identity images. This is based on [PEFT](https://github.com/huggingface/peft/tree/main/examples/lora_dreambooth). Download the folders of identity images from this [link](https://huggingface.co/datasets/wangkua1/w2w-celeba-generated/tree/main). Use 
 
 ## Acknowledgments
 Our code is based on implementations from the following repos: 
