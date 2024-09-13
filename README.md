@@ -52,9 +52,12 @@ To recreate a single datapoint in our dataset of model weights, run
 ```
 $ bash train.sh
 ```
-which conducts Dreambooth LoRA fine-tuning by running `train_dreambooth.py` given a folder of identity images. This is based on [PEFT](https://github.com/huggingface/peft/tree/main/examples/lora_dreambooth). Download the folders of identity images from this [link](https://huggingface.co/datasets/wangkua1/w2w-celeba-generated/tree/main). All you need to do is change ``--instance_data_dir="celeba_generated0/0"`` to the identity folder and ``--output_dir="output0"`` to the desired output directory. To find the correspondence between the identity images folder and the model in our provided dataset of weights, the ``file`` attribute in the provided ``identity_df.pt`` contains the number in the identity folder name  
+which conducts Dreambooth LoRA fine-tuning using the `train_dreambooth.py` script given a folder of identity images. This is based on [PEFT](https://github.com/huggingface/peft/tree/main/examples/lora_dreambooth). Download the folders of identity images from this [link](https://huggingface.co/datasets/wangkua1/w2w-celeba-generated/tree/main). All you need to do is change ``--instance_data_dir="celeba_generated0/0"`` to the identity folder and ``--output_dir="output0"`` to the desired output directory. 
 
 After conducting Dreambooth fine-tuning, you can see how we flatten the weights and conduct PCA in ``other/creating_weights_dataset.ipynb``.
+
+After going through all the folders of images, you should end up with 64974 models. After flattening these weights and concatenating them you should match our provided ``all_weights.pt`` file, which is mxn, with m=64974 and n = 99648 (the number of parameters for one set of LoRAs). The order in which the models are concatenated is important in order to match. The models should be concatenated in alphanumeric order of the folder names they were trained on. 
+
 
 ## Acknowledgments
 Our code is based on implementations from the following repos: 
