@@ -1,0 +1,22 @@
+accelerate launch --gpu_ids 0 \
+    train_dreambooth.py \
+        --pretrained_model_name_or_path="stablediffusionapi/realistic-vision-v51"  \
+        --instance_data_dir="celeba_generated0/0" \
+        --output_dir="output0" \
+        --num_dataloader_workers=1 \
+        --instance_prompt="sks person" \
+        --class_prompt="person" \
+        --with_prior_preservation --prior_loss_weight=1.0 \
+        --class_data_dir="regularization" \
+        --resolution=512 \
+        --train_batch_size=1 \
+        --lr_scheduler="constant" \
+        --lr_warmup_steps=0 \
+        --num_class_images=200 \
+        --use_lora \
+        --lora_r 1 \
+        --lora_alpha 27 \
+        --learning_rate=1e-4 \
+        --gradient_accumulation_steps=1 \
+        --max_train_steps=800 \
+        --seed 0 
