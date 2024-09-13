@@ -52,7 +52,7 @@ To recreate a single datapoint in our dataset of model weights, run
 ```
 $ bash train.sh
 ```
-which conducts Dreambooth LoRA fine-tuning by running `train_dreambooth.py` given a folder of identity images. This is based on [PEFT](https://github.com/huggingface/peft/tree/main/examples/lora_dreambooth). Download the folders of identity images from this [link](https://huggingface.co/datasets/wangkua1/w2w-celeba-generated/tree/main). All you need to do is change ``--instance_data_dir="celeba_generated0/0"`` to the identity folder and ``--output_dir="output0"`` to the desired output directory. 
+which conducts Dreambooth LoRA fine-tuning by running `train_dreambooth.py` given a folder of identity images. This is based on [PEFT](https://github.com/huggingface/peft/tree/main/examples/lora_dreambooth). Download the folders of identity images from this [link](https://huggingface.co/datasets/wangkua1/w2w-celeba-generated/tree/main). All you need to do is change ``--instance_data_dir="celeba_generated0/0"`` to the identity folder and ``--output_dir="output0"`` to the desired output directory. To find the correspondence between the identity images folder and the model in our provided dataset of weights, the ``file`` attribute in the provided ``identity_df.pt`` contains the number in the identity folder name  
 
 After conducting Dreambooth fine-tuning, you can see how we flatten the weights and conduct PCA in ``other/creating_weights_dataset.ipynb``.
 
