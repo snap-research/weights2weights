@@ -1,4 +1,5 @@
 # Interpreting the Weight Space of Customized Diffusion Models
+## NeurIPS 2024
 [[Paper](https://arxiv.org/abs/2406.09413)] [[Project Page](https://snap-research.github.io/weights2weights/)] [[Demo](https://huggingface.co/spaces/snap-research/weights2weights)] [[Files](https://huggingface.co/snap-research/weights2weights)]
 
 Official implementation of the paper "Interpreting the Weight Space of Customized Diffusion Models" (aka *weights2weights*). 
