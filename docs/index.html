@@ -194,7 +194,7 @@
       <!-- <h3 class="title is-3">Key idea</h3> -->
       <img src="./images/w2w_scheme.jpg" alt="scheme" style="border: 2px solid gray; border-radius: 15px; box-shadow: 0px 0px 10px #999; padding: 5px;">
       <br>
-      <p style="font-size: 18px;"><br>We create a dataset of model weights where each model is finetuned to encode a specific identity using low-rank updates (LoRA). These model weights lie on a weights manifold that we further project into a lower-dimensional subspace spanned by its principal components. We term the resulting space <em>weighst2weights</em> (<em>w2w</em>), in which operations transform one set of valid identity-encoding weights into another. We train linear classifiers to find separating hyperplanes in this space for semantic attributes. These define disentangled edit directions for an identity-encoding model in weight space.</p>
+      <p style="font-size: 18px;"><br>We create a dataset of model weights where each model is fine-tuned using low-rank updates (LoRA) to encode a different instance of a broad visual concept (e.g., human identities, dog breeds, etc.). These model weights lie on a weights manifold that we further project into a lower-dimensional subspace spanned by its principal components. We term the resulting space <em>weighst2weights</em> (<em>w2w</em>), in which operations transform one set of valid subject-encoding weights into another. We train linear classifiers to find separating hyperplanes in this space for semantic attributes. These define disentangled edit directions for an identity-encoding model in weight space.</p>
 
     </div>
   </div>
@@ -229,7 +229,7 @@
   </style>
 
     <div class="columns is-centered has-text-centered">
-      <h2 class="title is-3">Identity Editing</h2>
+      <h2 class="title is-3">Model Editing</h2>
     </div >
     <div class="content has-text-justified" >
            <p style="font-size: 18px;"> Given an identity parameterized by weights, we can manipulate attributes by traversing semantic directions in the <em>w2w</em> weight subspace. The edited weights result in a new model, where the subject has different attributes while still maintaining as much of the prior identity. These edits are <b>not</b> image-specific, and persist in appearance across different generation seeds and prompts. Additionally, as we operate on an identity weight manifold, minimal changes are made to other concepts, such as scene layout or other people. Try out the sliders below to demonstrate edits in <em>w2w</em> space. </p>
@@ -313,7 +313,7 @@
       <h2 class="title is-3">Inversion</h2>
     </div>
     <div class="content has-text-justified" >
-      <p style="font-size: 18px;"> By constraining a diffusion model's weights to lie in <em>w2w</em> space while following the standard diffusion loss, we can invert the identity from a single image into the model without overfitting. Typical inversion into a generative latent space projects the input onto the data (e.g., image) manifold. Similarly, we project onto the manifold of identity-encoding model weights. Projection into <em>w2w</em> space generalizes to unrealistic or non-human identities, distilling a realistic subject from an out-of-distribution identity. We provide examples of inversion below with a variety of input types. </p>
+      <p style="font-size: 18px;"> By constraining a diffusion model's weights to lie in <em>w2w</em> space while following the standard diffusion loss, we can invert the subject (i.e., identity) from a single image into the model without overfitting. Typical inversion into a generative latent space projects the input onto the data (e.g., image) manifold. Similarly, we project onto the manifold of identity-encoding model weights. Projection into <em>w2w</em> space generalizes to unrealistic or non-human identities, distilling a realistic subject from an out-of-distribution identity. We provide examples of inversion below with a variety of input types. </p>
     </div>
     <h3 class="title is-4">Click on an image to invert its subject into a model.</h2>
     <div class="content">
@@ -352,7 +352,7 @@
       <h2 class="title is-3">Sampling</h2>
     </div>
     <div class="content has-text-justified" >
-      <p style="font-size: 18px;">Modeling the underlying manifold of identity-encoding weights allows sampling a new model that lies on it. This results in a new model that generates a novel identity that is consistent across generations. We provide examples of sampling models from <em>w2w</em> space below, demonstrating a variety of facial attributes, hairstyles, and contexts. </p>
+      <p style="font-size: 18px;">Modeling the underlying manifold of subject-encoding weights allows sampling a new model that lies on it. This results in a new model that generates a novel identity that is consistent across generations. We provide examples of sampling models from <em>w2w</em> space below, demonstrating a variety of facial attributes, hairstyles, and contexts. </p>
     </div>
 
     <h3 class="title is-4">Click to sample an identity-encoding model.</h2>
