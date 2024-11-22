@@ -313,7 +313,7 @@
       <h2 class="title is-3">Inversion</h2>
     </div>
     <div class="content has-text-justified" >
-      <p style="font-size: 18px;"> By constraining a diffusion model's weights to lie in <em>w2w</em> space while following the standard diffusion loss, we can invert the subject (i.e., identity) from a single image into the model without overfitting. Typical inversion into a generative latent space projects the input onto the data (e.g., image) manifold. Similarly, we project onto the manifold of identity-encoding model weights. Projection into <em>w2w</em> space generalizes to unrealistic or non-human identities, distilling a realistic subject from an out-of-distribution identity. We provide examples of inversion below with a variety of input types. </p>
+      <p style="font-size: 18px;"> By constraining a diffusion model's weights to lie in <em>w2w</em> space while following the standard diffusion loss, we can invert the subject (i.e., identity) from a single image into the model without overfitting. This results in a new model which encodes the subject. Typical inversion into a generative latent space projects the input onto the data (e.g., image) manifold. Similarly, we project onto the manifold of identity-encoding model weights. Projection into <em>w2w</em> space generalizes to unrealistic or non-human identities, distilling a realistic subject from an out-of-distribution identity. We provide examples of inversion below with a variety of input types. </p>
     </div>
     <h3 class="title is-4">Click on an image to invert its subject into a model.</h2>
     <div class="content">
